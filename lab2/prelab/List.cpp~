@@ -1,0 +1,114 @@
+//Brian Kim, byk6q, List.cpp, 9/6/21
+#include <iostream>
+#include "List.h"
+using namespace std;
+
+//constructor
+List::List(){
+  head = new ListNode();
+  tail = new ListNode();
+  count = 0;
+  head -> next = tail;
+  tail -> previous = head;
+}
+// Copy constructor
+// Called when the code looks something like List list2 = list1;
+// (In other words, it is called when you are trying to construct a **new** list from an existing one)
+List::List(const List& source) {
+    head=new ListNode();
+    tail=new ListNode();
+    head->next=tail;
+    tail->previous=head;
+    count=0;
+
+    // Make a deep copy of the list
+    ListItr iter(source.head->next);
+    while (!iter.isPastEnd()) {
+        insertAtTail(iter.retrieve());
+        iter.moveForward();
+    }
+}
+// Copy assignment operator
+// Called when the code looks something like list2 = list1;
+// (In other words, it is called when you are trying to set an **existing** list equal to another one)
+List& List::operator=(const List& source) {
+    if (this == &source) {
+        // The two are the same list; no need to do anything
+        return *this;
+    } else {
+        // Clear out anything this list contained
+        // before copying over the items from the other list
+        makeEmpty();
+
+        // Make a deep copy of the list
+        ListItr iter(source.head->next);
+        while (!iter.isPastEnd()) {
+            insertAtTail(iter.retrieve());
+            iter.moveForward();
+        }
+    }
+    return *this;
+}
+List::~List(){//destructor
+
+}
+
+bool List::isEmpty()const{//return statement set to true for compile purposes
+  return true;
+}
+void List::makeEmpty(){
+
+}
+ListItr List::first(){//returns iterator that points to first ListNode
+  ListItr itr;
+  itr.current = head -> next;
+  return itr;
+}
+ListItr List::last(){//returns iterator that points to last ListNode
+  ListItr itr;
+  itr.current = tail -> previous;
+  return itr;
+}
+void List::insertAfter(int x, ListItr position){
+
+}
+void List::insertBefore(int x, ListItr position){
+
+}
+void List::insertAtTail(int x){//inserts x at the end(tail) of the list
+  ListNode* node = new ListNode();
+  node -> value = x;
+  node -> next = tail;
+  node -> previous = tail -> previous;
+  tail -> previous -> next = node;
+  tail -> previous = node;
+  count++;
+}
+ListItr List::find(int x){//List Iterator initialized so that it can compile
+  ListItr itr;
+  return itr;
+}
+void List::remove(int x){
+
+}
+int List::size()const{//returns the amount of elements in the list
+  return count;
+}
+void printList(List& source, bool direction){//prints the elements of the list
+  ListItr itr;
+  if(direction){
+    itr = source.first();
+    while(!itr.isPastEnd()){
+      cout << itr.retrieve() << " ";
+      itr.moveForward();
+    }
+  }
+  else{
+  itr = source.last();
+  while(!itr.isPastBeginning()){
+    cout << itr.retrieve() << " ";
+    itr.moveBackward();
+  }
+  }
+  cout<< endl;
+}
