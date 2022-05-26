@@ -1,0 +1,34 @@
+//Brian Kim, byk6q, 10/19/21, hashTable.cpp
+#include <iostream>
+#include <vector>
+#include <list>
+#include <algorithm>
+#include "hashTable.h"
+
+hashTable::hashTable(){
+  for(int i = 0; i<10000;i++){
+    v.push_back(list<string>());
+  }
+}
+hashTable::hashTable(int i){
+  v = vector<list<string> >(i);
+}
+hashTable:: ~hashTable(){
+
+}
+bool hashTable::contains(string s){
+  list<string>l = v[hash(s)];
+  return std::find(l.begin(), l.end(), s) != l.end();
+}
+void hashTable::insert(string s){
+  int x = hash(s);
+  v[x].push_back(s);
+}
+int hashTable::hash(string s){//used from the lecture slide
+  int count = 0;
+  for(int i = 0;i<s.length();i++){
+    count = int(s[i]) + count*37;
+  }
+  return count% v.size();
+}
+
