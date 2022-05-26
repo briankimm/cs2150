@@ -1,0 +1,27 @@
+	;; Brian Kim, byk6q, linearSearch.s, 11/5/21
+
+	global _linearSearch
+	section .text
+
+	;  first param: array, second param: size, third param: target
+_linearSearch:
+	mov rax, -1		; set return register to -1
+	xor r10, r10		; zero i
+
+_loop:
+	cmp rsi, r10		; if i == size, end loop
+	je _done
+	
+	cmp edx, [rdi+(4*r10)]	; compare third param (target) to a[i]
+	jne _inc			; if not equal, increment i
+
+	mov rax, r10		; if equal, then set return value = i
+	jmp _done		; end loop and return i
+
+_inc:
+	inc r10
+	jmp _loop		; increment i and continue loop
+
+_done:
+	ret
+	
