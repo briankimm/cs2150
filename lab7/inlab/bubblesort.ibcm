@@ -1,0 +1,98 @@
+C00E 000	jmp	input	skip around the variables
+000A 001 	dw	x	size of the array
+0000 002 i	dw	0	index i for outer loop
+0070 003 a	dw	0	int a[]
+0000 004 temp	dw	0	int temp to store num for bubblesort
+4000 005 strit	dw	0	store it (4000)
+3000 006 loadit dw	0	load it (3000)
+0000 007 zero	dw	zero	
+0001 008 one	dw	one
+000A 009 j	dw	9	index j for inner loop
+0000 00A temp2	dw	0	temp2 for swapping 
+0000 00B
+0000 00C
+0000 00D 
+3001 00E start	load	x	if i >= x, goto bubblesort (this is a loop to insert  values into array)
+6002 00F	sub	i
+E01C 010	jmpl	outlp   jumps to bubble sort
+D01C 011	jmpe	outlp 
+3005 012	load	strit	loads 4000
+5002 013	add	i	accumulator = 4000 + i
+5003 014	add	a	accumulator = 4000 + i + a
+4017 015 	store	doit	stores into memory 20
+1000 016 	readH		read in the array[i] value user inputs
+0000 017 doit	dw	0	stores read in value into array[i]
+3002 018	load	i	
+5008 019	add 	one	i++
+4002 01A	store	i
+C00E 01B	jmp	start	jump to beginning of loop
+3007 01C 	load	zero
+4002 01D	store	i	sets i = 0 for bubble sort
+3001 01E outlp	load	x	if i >= x, goto printloop
+6002 01F 	sub 	i
+E051 020	jmpl	xit	jump to printloop
+D051 021	jmpe 	xit
+3009 022 inlp	load	j	if j < 0, goto printloop
+6008 023 	sub	one	j = 9 initially
+4009 024	store	j
+6002 025	sub	i
+D04B 026 	jmpe		jump to increment 1
+3006 027	load	loadit	loads 3000 into accumulator
+5009 028	add	j	accumulator = 3000 + j + a
+5003 029	add	a	accumulator = 3000 + j + a
+402B 02A	store
+0000 02B doit	dw	0
+4004 02C	store	temp	stores array[j] value into temp
+3006 02D	load	loadit
+5009 02E	add	j
+5003 02F	add	a
+6008 030	sub	one	accumulator = 3000 + j + a - 1
+4032 031	store
+0000 032 doit	dw	0	loads array[j - 1] value into accumulator
+6004 033 	sub	temp	if a[j - 1] < a[j]
+E022 034	jmpl	inlp
+D022 035	jmpe	inlp
+3006 036 swap	load	loadit  else switch a[j] with a[j-1]
+5009 037	add	j
+5003 038	add	a	accumulator = 3000 + j + a - 1
+6008 039	sub	one
+403B 03A	store	doit
+0000 03B doit	dw	0
+400A 03C	store	temp2	stores value of a[j - 1] into temp2
+3005 03D	load	strit
+5009 03E	add 	j
+5003 03F	add	a
+4042 040	store	doit1
+300A 041	load	temp2
+0000 042 doit1  dw	0	stores temp2 into a[j]
+3005 043 	load 	strit
+5009 044	add	j
+5003 045	add	a	accumulator = 4000 + j + a - 1
+6008 046	sub	one	
+4049 047	store	doit2
+3004 048	load	temp
+0000 049 doit2  dw	0	stores temp into a[j - 1]
+C022 04A 	jmp	inlp
+3002 04B	load	i
+5008 04C	add	one	i++	
+4002 04D	store	i
+3001 04E	load	x
+4009 04F	store	j	j = 10
+C01E 050	jmp	outlp
+3007 051	load	0
+4002 052	store	i	i = 0
+3001 053 printl	load	x	if i >= x, goto exit (print forward loop)
+6002 054	sub	i
+E061 055	jmpl	xit     jumps to xit
+D061 056	jmpe	xit
+3006 057	load	loadit	loads 3000
+5002 058	add	i
+5003 059	add 	a	accumulator = 3000 + i + a
+405B 05A	store
+0000 05B doit	dw	0	loads the array[i] value into accumulator
+1800 05C 	printH 		prints accumulator value
+3002 05D 	load	i
+5008 05E	add	one	i++
+4002 05F store	i
+C053 060	jmp	printl
+0000 061 xit	halt
