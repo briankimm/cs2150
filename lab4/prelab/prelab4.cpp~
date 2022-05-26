@@ -1,0 +1,16 @@
+//Brian Kim, byk6q, 9/19/21, prelab4.cpp
+#include<iostream>
+using namespace std;
+
+void sizeOfTest(){
+
+}
+void overflow(){
+
+}
+void outputBinary(){
+
+}
+int main(){
+  return 0;
+}
