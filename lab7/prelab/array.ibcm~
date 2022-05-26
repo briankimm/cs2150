@@ -1,0 +1,4 @@
+C00A 000	jmp	start		skips to start of program
+0000 001	x	dw	0	size of the array
+0000 002	i	dw	0	index
+0000 003

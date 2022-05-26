@@ -1,0 +1,36 @@
+C009 000		jmp	start	goes to the start line
+0000 001	x	dw	0	int x = 0
+0000 002 	y	dw	0	int y = 0
+0000 003	z 	dw	0	int z = 0
+0000 004	sum	dw	0	int sum = 0
+B000 005		blank
+B000 006		blank
+B000 007		blank
+B000 008
+1000 009	start	readH		user input for x
+4001 00A		store	x
+1000 00B		readH		user input for y
+4002 00C		store	y
+B000 00D		blank
+B000 00E		blank
+1000 00F		readH		user input for z
+4003 010		store	z
+3004 011		load	sum	loads int sum = 0
+5001 012		add	x	adds x to accum
+5002 013		add	y	adds y to accum
+5003 014		add	z	adds z to accum
+B000 015		blank
+B000 016		blank	
+1800 017		printH		prints sum =x + y + z
+D01A 018		jmpe	xit	jumps to exit if accum == 0
+C009 019		jmp	start	goes back to the start
+3001 01A	xit	load	x	loads int x
+1800 01B		printH	x	prints x
+B000 01C		blank
+B000 01D		blank
+B000 01E		blank
+3002 01F		load	y	loads int y
+1800 020		printH	y	prints y
+3003 021		load	z	loads int z
+1800 022		printH 	z	prints z
+0000 023		halt		end of program
