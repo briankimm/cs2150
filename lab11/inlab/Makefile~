@@ -1,0 +1,18 @@
+#Brian Kim, byk6q, 11/30/21, Makefile
+# This is a comment
+
+CXX=clang++ $(CXXFLAGS)
+CXXFLAGS = -Wall -std=c++11
+
+a.out:middleearth.o traveling.o
+	$(CXX) $(DEBUG) traveling.o middleearth.o
+	doxygen Doxyfile
+
+middleearth.o: middleearth.cpp middleearth.h
+traveling.o: traveling.cpp
+
+
+
+.PHONY: clean
+clean:
+	-rm -f *.o a.out
