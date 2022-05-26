@@ -1,8 +1,7 @@
 //Brian Kim, byk6q, 9/13/21, postfixCalculator.cpp
 #include "postfixCalculator.h"
 #include <iostream>
-#include <stack>
-#include <cstdlib>
+#include "stack.h"
 using namespace std;
 
 //constructor
