@@ -1,0 +1,70 @@
+C00A 000		jmp	start		skips to start of program
+0000 001	x	dw	0	size of the array
+0000 002	i	dw	0	index
+0050 003	a	dw	50	int a[] address
+4000 004	storeIt	dw	4000	variable for store
+3000 005	loadIt	dw	3000	variable for load
+0000 006	zero	dw	0	variable for zero
+0001 007	one	dw	1	variable for one
+B000 008	blank
+B000 009	blank
+1000 00A 	start	readH		read in array size from user input
+4001 00B 		store	x	stores user input as x
+3006 00C		load 	zero	
+4002 00D		store	i	storing i = 0
+B000 00E		blank
+3001 00F	loop	load	x	beginning of the for loop
+6002 010		sub	i
+E020 011		jmpl		if (i>size) go to print forwards
+D020 012		jmpe		if (i==size) go to print forwards
+3004 013		load	storeIt	loads accumulator as 4000
+5002 014		add	i	adds i to 4000
+5003 015 		add	a	adds a to accumulator
+B000 016		blank
+B000 017		blank
+B000 018		blank
+401B 019	store	doit		plant the instruction in the program
+1000 01A		readH		reads in the inputs of the user
+0000 01B	doit	dw
+3002 01C		load	i
+5007 01D		add	one	adds one to i; i++
+4002 01E		store	i	stores the new value of i
+C00F 01F		jump	loop	jumps to the beginning of the loop
+3006 020	forwd	load	zero
+4002 021		store	i	sets i = 0 again
+3001 022		load	x
+6002 023		sub	i
+E036 024		jmpl		printb	if(i>size) 
+D036 025		jmpe		printb	if(i == size) 
+3005 026		loadIT		loads 3000
+5002 027 		add 	i	adds i to 3000
+5003 028		add 	a	adds a to 3000 + i
+B000 029		blank
+B000 02A		blank
+B000 02B		blank
+B000 02C		blank
+402E 02D		store		stores new value for accumulator
+0000 02E	printf	dw	0	loads the array[i] value into accumulator
+1800 02F		printH		prints the array forward
+3002 030		load	i
+5007 031		add	one	i++
+4002 032		store	i	stores new value of i
+B000 033		blank
+B000 034		blank
+C022 035		jmp		jmps to print forward
+3002 036	backw	load	i
+E045 037		jmpl	xit	if(i<0)
+D045 038		jmpe	xit	if(i==0)
+6007 039		sub 	one	i--
+B000 03A
+B000 03B
+4002 03C		store	i
+3005 03D		load	loadIt
+5003 03E		add	a
+5002 03F		add	i
+4041 040		store		stores new value for accumulator
+0000 041	printb	dw	0
+b000 042		blank
+1800 043		printH		print backwards
+C036 044		jump		jumps back to backw
+0000 045	exit	halt
