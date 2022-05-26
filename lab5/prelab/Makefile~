@@ -1,0 +1,18 @@
+# This is a comment
+
+CXX=clang++ $(CXXFLAGS)
+CXXFLAGS=-Wall # Enable all warnings
+DEBUG=-g
+
+pizza: TreeCalc.o TreeCalcTest.o TreeNode.o
+	$(CXX) $(DEBUG) pizza.o pizzadough.o tomatosauce.o toppings.o mushrooms.o peppers.o cheese.o pepperoni.o -o pizza
+	@echo "Pizza is Hot and Ready!"
+
+TreeCalc.o: TreeCalc.cpp TreeCalc.h TreeNode.h
+TreeCalcTest.o: TreeCalcTest.cpp TreeCalc.h TreeNode.h
+TreeNode.o: TreeNode.cpp TreeNode.h
+
+
+.PHONY: clean
+clean:
+	-rm -f *.o pizza
