@@ -1,0 +1,23 @@
+//Brian Kim, byk6q, 11/2/21, mathfun.cpp
+
+#include <iostream>
+#include <time.h>
+#include <cstdlib>
+
+using namespace std;
+
+extern "C" long product(long, long);
+extern "C" long power(long, long);
+
+int main(){
+  long x, y, a, b;
+  cout<<"Enter integer 1: ";
+  cin >> x;
+  cout<<"Enter integer 2: ";
+  cin >> y;
+
+  a = product(x, y);
+
+  cout<<"Product: " << a << endl;
+  return 0;
+}

@@ -1,0 +1,17 @@
+	;; Brian Kim, byk6q, mathlib.s, 11/1/21
+
+	global _product
+	global _power
+	section .text
+
+_product:
+	xor	rax, rax	;zero out the return register
+	xor	r10, r10	;zero out the counter i
+_add:
+	cmp	r10, rsi	; if i == a
+	je 	addDone		;exits out because its done 
+	add	rax, rdi	;else adds x to rax
+	dec	rsi		;decrements a
+	jmp	_add		;jumps back to the beginning of loop
+_addDone:
+	ret			;returns rax
