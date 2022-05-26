@@ -1,0 +1,14 @@
+#Brian Kim, byk6q, 11/30/21, Makefile
+# This is a comment
+
+CXX=clang++ $(CXXFLAGS)
+CXXFLAGS = -Wall
+
+a.out:topological.o
+	$(CXX) $(DEBUG) topological.o -o a.out
+
+topological.o: topological.cpp
+
+.PHONY: clean
+clean:
+	-rm -f *.o a.out
