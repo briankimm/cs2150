@@ -1,0 +1,33 @@
+C007 000	jmp			jumps to the start
+0020 001	dw	length		length of the program
+0000 002	dw	i		iterator
+0002 003	dw	temp
+0000 004	dw	zero		stores value of zero
+0001 005	dw	one		stores value of one
+3000 006	dw	loadIt		load instruction
+3004 007	start	load	zero	loads zero
+4002 008		store 	i	now i = 0
+3002 009	loop	load	i	loads i
+6003 00A		sub	temp	i -temp
+D01A 00B		jmpe		if(temp == i) jmp 
+3001 00C		load	length	length of the program
+6002 00D		sub	i	accum = length - i
+E020 00E		jmpl	xit	if(accum < 0) jmps to end of program
+B000 00F		blank
+3006 010		load	loadIt	load load instruction
+5002 011		add	i	3000 + i
+4013 012		store	doit	store load instruction
+0000 013	doit	dw		stores
+1800 014		printH		print
+B000 015		blank
+3002 016		load	i	loads iterator
+5005 017		add	one	i++
+4002 018		store 	i	stores new value of i
+C009 019		jmp		jumps back to the beginning of the loop
+3004 01A	printi	load	zero
+1800 01B		printH
+3002 01C		load	i
+5005 01D		add 	one	i++
+4002 01E
+C009 01F		jmp		jump back up to the beginning of the loop
+0000 020	xit	halt
