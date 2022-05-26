@@ -1,0 +1,17 @@
+//Brian Kim, byk6q, hNode.cpp, 11/22/21
+#ifndef HNODE_H
+#define HNODE_H
+#include <iostream>
+
+using namespace std;
+class hNode{
+public:
+  hNode();
+  hNode(int x);
+  hNode* left;
+  hNode* right;
+  char value;
+  int freq;
+
+  friend class heap;
+}
